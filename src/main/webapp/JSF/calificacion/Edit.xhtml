@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CalificacionEditDlg" widgetVar="CalificacionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCalificacionTitle}">
+            <h:form id="CalificacionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{calificacionController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCalificacionLabel_codigo}" for="codigo" />
+                        <p:inputText id="codigo" value="#{calificacionController.selected.codigo}" title="#{bundle.EditCalificacionTitle_codigo}" required="true" requiredMessage="#{bundle.EditCalificacionRequiredMessage_codigo}"/>
+                        <p:outputLabel value="#{bundle.EditCalificacionLabel_fechaCalificacion}" for="fechaCalificacion" />
+                        <p:calendar id="fechaCalificacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{calificacionController.selected.fechaCalificacion}" title="#{bundle.EditCalificacionTitle_fechaCalificacion}" required="true" requiredMessage="#{bundle.EditCalificacionRequiredMessage_fechaCalificacion}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditCalificacionLabel_nota}" for="nota" />
+                        <p:inputText id="nota" value="#{calificacionController.selected.nota}" title="#{bundle.EditCalificacionTitle_nota}" required="true" requiredMessage="#{bundle.EditCalificacionRequiredMessage_nota}"/>
+                        <p:outputLabel value="#{bundle.EditCalificacionLabel_rutAlumno}" for="rutAlumno" />
+                        <p:selectOneMenu id="rutAlumno" value="#{calificacionController.selected.rutAlumno}" required="true" requiredMessage="#{bundle.EditCalificacionRequiredMessage_rutAlumno}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{alumnoController.itemsAvailableSelectOne}"
+                                           var="rutAlumnoItem"
+                                           itemValue="#{rutAlumnoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditCalificacionLabel_codAsignatura}" for="codAsignatura" />
+                        <p:selectOneMenu id="codAsignatura" value="#{calificacionController.selected.codAsignatura}" required="true" requiredMessage="#{bundle.EditCalificacionRequiredMessage_codAsignatura}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{asignaturaController.itemsAvailableSelectOne}"
+                                           var="codAsignaturaItem"
+                                           itemValue="#{codAsignaturaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{calificacionController.update}" value="#{bundle.Save}" update="display,:CalificacionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CalificacionEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CalificacionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

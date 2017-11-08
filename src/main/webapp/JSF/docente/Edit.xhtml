@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DocenteEditDlg" widgetVar="DocenteEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDocenteTitle}">
+            <h:form id="DocenteEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{docenteController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDocenteLabel_rutPersona}" for="rutPersona" />
+                        <p:inputText id="rutPersona" value="#{docenteController.selected.rutPersona}" title="#{bundle.EditDocenteTitle_rutPersona}" required="true" requiredMessage="#{bundle.EditDocenteRequiredMessage_rutPersona}"/>
+                        <p:outputLabel value="#{bundle.EditDocenteLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{docenteController.selected.estado}" title="#{bundle.EditDocenteTitle_estado}" />
+                        <p:outputLabel value="#{bundle.EditDocenteLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{docenteController.selected.observaciones}" title="#{bundle.EditDocenteTitle_observaciones}" />
+                        <p:outputLabel value="#{bundle.EditDocenteLabel_persona}" for="persona" />
+                        <p:selectOneMenu id="persona" value="#{docenteController.selected.persona}" required="true" requiredMessage="#{bundle.EditDocenteRequiredMessage_persona}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="personaItem"
+                                           itemValue="#{personaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{docenteController.update}" value="#{bundle.Save}" update="display,:DocenteListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DocenteEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DocenteEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

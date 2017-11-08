@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaViewDlg" widgetVar="PersonaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPersonaTitle}">
+            <h:form id="PersonaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPersonaLabel_rut}"/>
+                        <h:outputText value="#{personaController.selected.rut}" title="#{bundle.ViewPersonaTitle_rut}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_nombreCompleto}"/>
+                        <h:outputText value="#{personaController.selected.nombreCompleto}" title="#{bundle.ViewPersonaTitle_nombreCompleto}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_fechaNacimiento}"/>
+                        <h:outputText value="#{personaController.selected.fechaNacimiento}" title="#{bundle.ViewPersonaTitle_fechaNacimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_domicilio}"/>
+                        <h:outputText value="#{personaController.selected.domicilio}" title="#{bundle.ViewPersonaTitle_domicilio}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_ciudad}"/>
+                        <h:outputText value="#{personaController.selected.ciudad}" title="#{bundle.ViewPersonaTitle_ciudad}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_pais}"/>
+                        <h:outputText value="#{personaController.selected.pais}" title="#{bundle.ViewPersonaTitle_pais}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_correo}"/>
+                        <h:outputText value="#{personaController.selected.correo}" title="#{bundle.ViewPersonaTitle_correo}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_telefono}"/>
+                        <h:outputText value="#{personaController.selected.telefono}" title="#{bundle.ViewPersonaTitle_telefono}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_tipo}"/>
+                        <h:outputText value="#{personaController.selected.tipo}" title="#{bundle.ViewPersonaTitle_tipo}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_familiaAnfitriona}"/>
+                        <h:outputText value="#{personaController.selected.familiaAnfitriona}" title="#{bundle.ViewPersonaTitle_familiaAnfitriona}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_centroEstudiosLocal}"/>
+                        <h:outputText value="#{personaController.selected.centroEstudiosLocal}" title="#{bundle.ViewPersonaTitle_centroEstudiosLocal}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_alumno}"/>
+                        <h:outputText value="#{personaController.selected.alumno}" title="#{bundle.ViewPersonaTitle_alumno}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_usuario}"/>
+                        <h:outputText value="#{personaController.selected.usuario}" title="#{bundle.ViewPersonaTitle_usuario}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_docente}"/>
+                        <h:outputText value="#{personaController.selected.docente}" title="#{bundle.ViewPersonaTitle_docente}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PersonaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

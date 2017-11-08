@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AlumnoViewDlg" widgetVar="AlumnoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAlumnoTitle}">
+            <h:form id="AlumnoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{alumnoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAlumnoLabel_rutPersona}"/>
+                        <h:outputText value="#{alumnoController.selected.rutPersona}" title="#{bundle.ViewAlumnoTitle_rutPersona}"/>
+                        <h:outputText value="#{bundle.ViewAlumnoLabel_numeroMatricula}"/>
+                        <h:outputText value="#{alumnoController.selected.numeroMatricula}" title="#{bundle.ViewAlumnoTitle_numeroMatricula}"/>
+                        <h:outputText value="#{bundle.ViewAlumnoLabel_fechaMatricula}"/>
+                        <h:outputText value="#{alumnoController.selected.fechaMatricula}" title="#{bundle.ViewAlumnoTitle_fechaMatricula}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAlumnoLabel_persona}"/>
+                        <h:outputText value="#{alumnoController.selected.persona}" title="#{bundle.ViewAlumnoTitle_persona}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AlumnoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

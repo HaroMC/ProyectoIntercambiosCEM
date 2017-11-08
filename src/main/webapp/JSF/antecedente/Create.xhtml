@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AntecedenteCreateDlg" widgetVar="AntecedenteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAntecedenteTitle}">
+            <h:form id="AntecedenteCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{antecedenteController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAntecedenteLabel_codigo}" for="codigo" />
+                        <p:inputText id="codigo" value="#{antecedenteController.selected.codigo}" title="#{bundle.CreateAntecedenteTitle_codigo}" required="true" requiredMessage="#{bundle.CreateAntecedenteRequiredMessage_codigo}"/>
+                        <p:outputLabel value="#{bundle.CreateAntecedenteLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{antecedenteController.selected.descripcion}" title="#{bundle.CreateAntecedenteTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateAntecedenteRequiredMessage_descripcion}"/>
+                        <p:outputLabel value="#{bundle.CreateAntecedenteLabel_fechaCaducidad}" for="fechaCaducidad" />
+                        <p:calendar id="fechaCaducidad" pattern="MM/dd/yyyy HH:mm:ss" value="#{antecedenteController.selected.fechaCaducidad}" title="#{bundle.EditAntecedenteTitle_fechaCaducidad}" required="true" requiredMessage="#{bundle.EditAntecedenteRequiredMessage_fechaCaducidad}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAntecedenteLabel_documento}" for="documento" />
+                        <p:inputTextarea rows="4" cols="30" id="documento" value="#{antecedenteController.selected.documento}" title="#{bundle.CreateAntecedenteTitle_documento}" />
+                        <p:outputLabel value="#{bundle.CreateAntecedenteLabel_rutFamilia}" for="rutFamilia" />
+                        <p:selectOneMenu id="rutFamilia" value="#{antecedenteController.selected.rutFamilia}" required="true" requiredMessage="#{bundle.EditAntecedenteRequiredMessage_rutFamilia}">
+                            <f:selectItems value="#{familiaAnfitrionaController.itemsAvailableSelectOne}"
+                                           var="rutFamiliaItem"
+                                           itemValue="#{rutFamiliaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{antecedenteController.create}" value="#{bundle.Save}" update="display,:AntecedenteListForm:datalist,:growl" oncomplete="handleSubmit(args,'AntecedenteCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AntecedenteCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

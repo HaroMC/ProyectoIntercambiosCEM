@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AsignaturaViewDlg" widgetVar="AsignaturaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAsignaturaTitle}">
+            <h:form id="AsignaturaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{asignaturaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAsignaturaLabel_codigo}"/>
+                        <h:outputText value="#{asignaturaController.selected.codigo}" title="#{bundle.ViewAsignaturaTitle_codigo}"/>
+                        <h:outputText value="#{bundle.ViewAsignaturaLabel_nombreAsignatura}"/>
+                        <h:outputText value="#{asignaturaController.selected.nombreAsignatura}" title="#{bundle.ViewAsignaturaTitle_nombreAsignatura}"/>
+                        <h:outputText value="#{bundle.ViewAsignaturaLabel_descripcion}"/>
+                        <h:outputText value="#{asignaturaController.selected.descripcion}" title="#{bundle.ViewAsignaturaTitle_descripcion}"/>
+                        <h:outputText value="#{bundle.ViewAsignaturaLabel_cupos}"/>
+                        <h:outputText value="#{asignaturaController.selected.cupos}" title="#{bundle.ViewAsignaturaTitle_cupos}"/>
+                        <h:outputText value="#{bundle.ViewAsignaturaLabel_rutDocente}"/>
+                        <h:outputText value="#{asignaturaController.selected.rutDocente}" title="#{bundle.ViewAsignaturaTitle_rutDocente}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AsignaturaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

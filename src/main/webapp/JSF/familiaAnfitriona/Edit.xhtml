@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FamiliaAnfitrionaEditDlg" widgetVar="FamiliaAnfitrionaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditFamiliaAnfitrionaTitle}">
+            <h:form id="FamiliaAnfitrionaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{familiaAnfitrionaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditFamiliaAnfitrionaLabel_rutPersona}" for="rutPersona" />
+                        <p:inputText id="rutPersona" value="#{familiaAnfitrionaController.selected.rutPersona}" title="#{bundle.EditFamiliaAnfitrionaTitle_rutPersona}" required="true" requiredMessage="#{bundle.EditFamiliaAnfitrionaRequiredMessage_rutPersona}"/>
+                        <p:outputLabel value="#{bundle.EditFamiliaAnfitrionaLabel_cantidadIntegrantes}" for="cantidadIntegrantes" />
+                        <p:inputText id="cantidadIntegrantes" value="#{familiaAnfitrionaController.selected.cantidadIntegrantes}" title="#{bundle.EditFamiliaAnfitrionaTitle_cantidadIntegrantes}" required="true" requiredMessage="#{bundle.EditFamiliaAnfitrionaRequiredMessage_cantidadIntegrantes}"/>
+                        <p:outputLabel value="#{bundle.EditFamiliaAnfitrionaLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{familiaAnfitrionaController.selected.estado}" title="#{bundle.EditFamiliaAnfitrionaTitle_estado}" required="true" requiredMessage="#{bundle.EditFamiliaAnfitrionaRequiredMessage_estado}"/>
+                        <p:outputLabel value="#{bundle.EditFamiliaAnfitrionaLabel_persona}" for="persona" />
+                        <p:selectOneMenu id="persona" value="#{familiaAnfitrionaController.selected.persona}" required="true" requiredMessage="#{bundle.EditFamiliaAnfitrionaRequiredMessage_persona}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="personaItem"
+                                           itemValue="#{personaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{familiaAnfitrionaController.update}" value="#{bundle.Save}" update="display,:FamiliaAnfitrionaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FamiliaAnfitrionaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FamiliaAnfitrionaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CertificadoCreateDlg" widgetVar="CertificadoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCertificadoTitle}">
+            <h:form id="CertificadoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{certificadoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCertificadoLabel_codigo}" for="codigo" />
+                        <p:inputText id="codigo" value="#{certificadoController.selected.codigo}" title="#{bundle.CreateCertificadoTitle_codigo}" required="true" requiredMessage="#{bundle.CreateCertificadoRequiredMessage_codigo}"/>
+                        <p:outputLabel value="#{bundle.CreateCertificadoLabel_fechaSolicitud}" for="fechaSolicitud" />
+                        <p:calendar id="fechaSolicitud" pattern="MM/dd/yyyy HH:mm:ss" value="#{certificadoController.selected.fechaSolicitud}" title="#{bundle.EditCertificadoTitle_fechaSolicitud}" required="true" requiredMessage="#{bundle.EditCertificadoRequiredMessage_fechaSolicitud}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateCertificadoLabel_rutAlumno}" for="rutAlumno" />
+                        <p:selectOneMenu id="rutAlumno" value="#{certificadoController.selected.rutAlumno}" required="true" requiredMessage="#{bundle.EditCertificadoRequiredMessage_rutAlumno}">
+                            <f:selectItems value="#{alumnoController.itemsAvailableSelectOne}"
+                                           var="rutAlumnoItem"
+                                           itemValue="#{rutAlumnoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{certificadoController.create}" value="#{bundle.Save}" update="display,:CertificadoListForm:datalist,:growl" oncomplete="handleSubmit(args,'CertificadoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CertificadoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

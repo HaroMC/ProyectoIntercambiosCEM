@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PostulacionesCelCreateDlg" widgetVar="PostulacionesCelCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePostulacionesCelTitle}">
+            <h:form id="PostulacionesCelCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{postulacionesCelController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePostulacionesCelLabel_codigo}" for="codigo" />
+                        <p:inputText id="codigo" value="#{postulacionesCelController.selected.codigo}" title="#{bundle.CreatePostulacionesCelTitle_codigo}" required="true" requiredMessage="#{bundle.CreatePostulacionesCelRequiredMessage_codigo}"/>
+                        <p:outputLabel value="#{bundle.CreatePostulacionesCelLabel_fechaInscripcion}" for="fechaInscripcion" />
+                        <p:calendar id="fechaInscripcion" pattern="MM/dd/yyyy HH:mm:ss" value="#{postulacionesCelController.selected.fechaInscripcion}" title="#{bundle.EditPostulacionesCelTitle_fechaInscripcion}" required="true" requiredMessage="#{bundle.EditPostulacionesCelRequiredMessage_fechaInscripcion}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePostulacionesCelLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{postulacionesCelController.selected.estado}" title="#{bundle.CreatePostulacionesCelTitle_estado}" required="true" requiredMessage="#{bundle.CreatePostulacionesCelRequiredMessage_estado}"/>
+                        <p:outputLabel value="#{bundle.CreatePostulacionesCelLabel_rutCel}" for="rutCel" />
+                        <p:selectOneMenu id="rutCel" value="#{postulacionesCelController.selected.rutCel}" required="true" requiredMessage="#{bundle.EditPostulacionesCelRequiredMessage_rutCel}">
+                            <f:selectItems value="#{centroEstudiosLocalController.itemsAvailableSelectOne}"
+                                           var="rutCelItem"
+                                           itemValue="#{rutCelItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePostulacionesCelLabel_codPrograma}" for="codPrograma" />
+                        <p:selectOneMenu id="codPrograma" value="#{postulacionesCelController.selected.codPrograma}" required="true" requiredMessage="#{bundle.EditPostulacionesCelRequiredMessage_codPrograma}">
+                            <f:selectItems value="#{programaController.itemsAvailableSelectOne}"
+                                           var="codProgramaItem"
+                                           itemValue="#{codProgramaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{postulacionesCelController.create}" value="#{bundle.Save}" update="display,:PostulacionesCelListForm:datalist,:growl" oncomplete="handleSubmit(args,'PostulacionesCelCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PostulacionesCelCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

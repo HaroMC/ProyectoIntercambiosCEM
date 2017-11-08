@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AsignaturaEditDlg" widgetVar="AsignaturaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAsignaturaTitle}">
+            <h:form id="AsignaturaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{asignaturaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAsignaturaLabel_codigo}" for="codigo" />
+                        <p:inputText id="codigo" value="#{asignaturaController.selected.codigo}" title="#{bundle.EditAsignaturaTitle_codigo}" required="true" requiredMessage="#{bundle.EditAsignaturaRequiredMessage_codigo}"/>
+                        <p:outputLabel value="#{bundle.EditAsignaturaLabel_nombreAsignatura}" for="nombreAsignatura" />
+                        <p:inputText id="nombreAsignatura" value="#{asignaturaController.selected.nombreAsignatura}" title="#{bundle.EditAsignaturaTitle_nombreAsignatura}" required="true" requiredMessage="#{bundle.EditAsignaturaRequiredMessage_nombreAsignatura}"/>
+                        <p:outputLabel value="#{bundle.EditAsignaturaLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{asignaturaController.selected.descripcion}" title="#{bundle.EditAsignaturaTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.EditAsignaturaLabel_cupos}" for="cupos" />
+                        <p:inputText id="cupos" value="#{asignaturaController.selected.cupos}" title="#{bundle.EditAsignaturaTitle_cupos}" />
+                        <p:outputLabel value="#{bundle.EditAsignaturaLabel_rutDocente}" for="rutDocente" />
+                        <p:selectOneMenu id="rutDocente" value="#{asignaturaController.selected.rutDocente}" required="true" requiredMessage="#{bundle.EditAsignaturaRequiredMessage_rutDocente}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{docenteController.itemsAvailableSelectOne}"
+                                           var="rutDocenteItem"
+                                           itemValue="#{rutDocenteItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{asignaturaController.update}" value="#{bundle.Save}" update="display,:AsignaturaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AsignaturaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AsignaturaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

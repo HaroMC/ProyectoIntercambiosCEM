@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AntecedenteViewDlg" widgetVar="AntecedenteViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAntecedenteTitle}">
+            <h:form id="AntecedenteViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{antecedenteController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAntecedenteLabel_codigo}"/>
+                        <h:outputText value="#{antecedenteController.selected.codigo}" title="#{bundle.ViewAntecedenteTitle_codigo}"/>
+                        <h:outputText value="#{bundle.ViewAntecedenteLabel_descripcion}"/>
+                        <h:outputText value="#{antecedenteController.selected.descripcion}" title="#{bundle.ViewAntecedenteTitle_descripcion}"/>
+                        <h:outputText value="#{bundle.ViewAntecedenteLabel_fechaCaducidad}"/>
+                        <h:outputText value="#{antecedenteController.selected.fechaCaducidad}" title="#{bundle.ViewAntecedenteTitle_fechaCaducidad}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAntecedenteLabel_documento}"/>
+                        <h:outputText value="#{antecedenteController.selected.documento}" title="#{bundle.ViewAntecedenteTitle_documento}"/>
+                        <h:outputText value="#{bundle.ViewAntecedenteLabel_rutFamilia}"/>
+                        <h:outputText value="#{antecedenteController.selected.rutFamilia}" title="#{bundle.ViewAntecedenteTitle_rutFamilia}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AntecedenteViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
